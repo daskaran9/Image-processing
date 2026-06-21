@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+QR & OTP
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card p-4" style="max-width:700px; margin:auto;">
+
+        <h2 class="text-center">
+            QR & OTP Generated
+        </h2>
+
+        <hr>
+
+        <h5 class="text-center">
+            Image ID: {{ image_id }}
+        </h5>
+
+        <div class="text-center mt-4">
+
+            <div style="
+            max-width:300px;
+            margin:auto;
+            padding:15px;
+            border:1px solid #ffc107;
+            border-radius:15px;
+            background:#fff8e1;
+            ">
+
+                <h5>OTP</h5>
+
+                <h1 style="
+                color:#dc3545;
+                letter-spacing:5px;
+                ">
+                    {{ otp }}
+                </h1>
+
+            </div>
+
+        </div>
+
+        <div class="text-center mt-4">
+
+            <img
+            src="/{{ qr_image }}"
+            width="220"
+            height="220"
+            class="border rounded p-2 bg-white">
+
+        </div>
+
+        <div class="text-center mt-4">
+
+            <a
+            href="/{{ qr_image }}"
+            download
+            class="btn btn-success">
+
+                Download QR
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Segmentation
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>
+        Image Segmentation
+    </h2>
+
+    <form method="POST">
+
+        <div class="row">
+
+            <!-- Method Selection -->
+            <div class="col-md-3">
+
+                <div class="card p-3">
+
+                    <h4>
+                        Method
+                    </h4>
+
+                    <select
+                    name="method"
+                    class="form-select">
+
+                        <option value="otsu">
+                            Otsu Thresholding
+                        </option>
+
+                        <option value="edge">
+                            Edge Detection
+                        </option>
+
+                    </select>
+
+                    <button
+                    class="btn btn-primary mt-3">
+
+                        Run Segmentation
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Enhanced Image -->
+            <div class="col-md-4">
+
+                <div class="card p-3">
+
+                    <h4>
+                        Enhanced Image
+                    </h4>
+
+                    <div class="image-container">
+
+                        <img
+                        src="/{{enhanced_image}}"
+                        class="img-fluid rounded">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Segmented Image -->
+            <div class="col-md-5">
+
+                <div class="card p-3">
+
+                    <h4>
+                        Segmented Image
+                    </h4>
+
+                    {% if segmented_image %}
+
+                    <div class="image-container">
+
+                        <img
+                        src="/{{segmented_image}}"
+                        class="img-fluid rounded">
+
+                    </div>
+
+                    <a
+                    href="/{{segmented_image}}"
+                    download
+                    class="btn btn-success mt-3">
+
+                        Download Segmented
+
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+    {% if segmented_image %}
+
+    <div class="text-end mt-4">
+
+        <a
+        href="/generate_qr/{{filename}}"
+        class="btn btn-warning btn-lg">
+
+            Next
+
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h2>
+    Welcome {{ username }}
+</h2>
+
+<div class="row mb-4">
+
+    <div class="col-3">
+        <div class="card p-3 text-center">
+            <h5>📤 Uploaded</h5>
+            <h2>{{ uploaded_count }}</h2>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="card p-3 text-center">
+            <h5>✨ Enhanced</h5>
+            <h2>{{ enhanced_count }}</h2>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="card p-3 text-center">
+            <h5>🧩 Segmented</h5>
+            <h2>{{ segmented_count }}</h2>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="card p-3 text-center">
+            <h5>🔐 QR Created</h5>
+            <h2>{{ qr_count }}</h2>
+        </div>
+    </div>
+
+</div>
+
+<div class="card p-4 mt-3">
+
+    <h4>
+        📤 Upload Image
+    </h4>
+
+    {% if current_image %}
+
+    <div class="card p-4 mt-4">
+
+        <h4>
+            Current Image
+        </h4>
+
+        <div class="text-center">
+
+            <img
+            src="/static/uploads/{{ current_image }}"
+            class="img-fluid rounded"
+            style="max-height:400px;">
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+    <form
+    action="/upload"
+    method="POST"
+    enctype="multipart/form-data">
+
+        <div class="upload-dropzone">
+
+            <div class="upload-icon">
+                ☁️
+            </div>
+
+            <h4>
+                Drag & Drop Image Here
+            </h4>
+
+            <p>
+                Or choose an image from your computer
+            </p>
+
+            <input
+            type="file"
+            name="image"
+            id="fileInput"
+            class="form-control"
+            required>
+
+            <small>
+                Supported Formats: JPG, JPEG, PNG | Maximum Size: 5MB
+            </small>
+
+        </div>
+
+        <button
+        type="submit"
+        class="btn btn-primary mt-3">
+
+            Upload Image
+
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

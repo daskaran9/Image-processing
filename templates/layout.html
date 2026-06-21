@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        body{
+            background:#f3f4f6;
+            font-family:'Segoe UI',sans-serif;
+        }
+
+        /* Sidebar */
+
+        .sidebar{
+            width:270px;
+            height:100vh;
+            position:fixed;
+            left:0;
+            top:0;
+            background:#0f172a;
+            color:white;
+            overflow-y:auto;
+            box-shadow:4px 0 20px rgba(0,0,0,.15);
+        }
+
+        .logo{
+            text-align:center;
+            padding:20px;
+            font-size:28px;
+            font-weight:700;
+            color:#60a5fa;
+        }
+
+        /* Modern User Card */
+
+        .user-card{
+
+            margin:15px;
+
+            padding:25px 20px;
+
+            border-radius:22px;
+
+            background:linear-gradient(
+                145deg,
+                #1e293b,
+                #0f172a
+            );
+
+            text-align:center;
+
+            box-shadow:
+            0 10px 30px rgba(0,0,0,.35);
+
+            border:1px solid rgba(255,255,255,.08);
+        }
+
+        .avatar{
+
+            width:75px;
+
+            height:75px;
+
+            margin:auto;
+
+            border-radius:50%;
+
+            background:linear-gradient(
+                135deg,
+                #3b82f6,
+                #8b5cf6
+            );
+
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+
+            color:white;
+
+            font-size:30px;
+
+            font-weight:bold;
+
+            margin-bottom:15px;
+        }
+
+        .user-card h5{
+
+            color:white;
+
+            margin-bottom:10px;
+        }
+
+        .badge-status{
+
+            display:inline-block;
+
+            padding:6px 14px;
+
+            background:rgba(34,197,94,.15);
+
+            color:#22c55e;
+
+            border-radius:30px;
+
+            font-size:13px;
+        }
+
+        .user-divider{
+
+            height:1px;
+
+            background:rgba(255,255,255,.08);
+
+            margin:20px 0;
+        }
+
+        .user-info{
+
+            display:flex;
+
+            justify-content:space-between;
+        }
+
+        .info-item span{
+
+            display:block;
+
+            color:#94a3b8;
+
+            font-size:12px;
+        }
+
+        .info-item strong{
+
+            color:white;
+
+            font-size:14px;
+        }
+
+        /* Sidebar Menu */
+
+        .sidebar a{
+
+            display:block;
+
+            color:#d1d5db;
+
+            text-decoration:none;
+
+            padding:14px 22px;
+
+            margin:6px 10px;
+
+            border-radius:12px;
+
+            transition:.3s;
+        }
+
+        .sidebar a:hover{
+
+            background:#2563eb;
+
+            color:white;
+
+            transform:translateX(5px);
+        }
+
+        .sidebar a.active{
+
+            background:#2563eb;
+
+            color:white;
+
+            font-weight:bold;
+        }
+
+        /* Content */
+
+        .content{
+
+            margin-left:270px;
+
+            padding:35px;
+        }
+
+        /* Header Card */
+
+        .top-card{
+
+            background:linear-gradient(
+                135deg,
+                #2563eb,
+                #7c3aed
+            );
+
+            color:white;
+
+            border-radius:20px;
+
+            padding:20px;
+
+            margin-bottom:25px;
+
+            box-shadow:0 10px 25px rgba(0,0,0,.15);
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">
+        🖼️ SIPS
+    </div>
+
+    <div class="user-card">
+
+        <div class="avatar">
+            {{ session['username'][0]|upper }}
+        </div>
+
+        <h5>
+            {{ session['username'] }}
+        </h5>
+
+        <span class="badge-status">
+            ● Active
+        </span>
+
+        <div class="user-divider"></div>
+
+        <div class="user-info">
+
+            <div class="info-item">
+                <span>Role</span>
+                <strong>{{ session['role']|capitalize }}</strong>
+            </div>
+
+            <div class="info-item">
+                <span>Security</span>
+                <strong>Protected</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+    <a href="/dashboard"
+       class="{% if request.path == '/dashboard' %}active{% endif %}">
+        🏠 Home
+    </a>
+
+    <a href="/enhancement"
+       class="{% if request.path == '/enhancement' %}active{% endif %}">
+        ✨ Enhancement
+    </a>
+
+    <a href="/segmentation"
+       class="{% if request.path == '/segmentation' %}active{% endif %}">
+        🧩 Segmentation
+    </a>
+
+    <a href="/qr_otp"
+       class="{% if request.path == '/qr_otp' %}active{% endif %}">
+        🔐 QR & OTP
+    </a>
+    {% if session['role'] == 'admin' %}
+    <a herf="/history">
+       📜 History
+    </a>
+    <a href="/download_zip">
+      📦 Download ZIP
+    </a>
+    <a href="/backup">
+       💾 Backup & Recovery
+    </a>
+    {% endif %}
+    <a href="/logout">
+        🚪 Logout
+    </a>
+
+</div>
+
+<div class="content">
+
+    <div class="top-card">
+
+        <h4>
+            Secure Image Processing System
+        </h4>
+
+        <p class="mb-0">
+            Enhancement • Segmentation • QR Security • OTP Verification
+        </p>
+
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+</div>
+
+</body>
+</html>

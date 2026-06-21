@@ -1,0 +1,175 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Enhancement
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>
+        Image Enhancement
+    </h2>
+
+    <form method="POST">
+
+        <div class="row">
+
+            <!-- Controls -->
+            <div class="col-md-3">
+
+                <div class="card p-3">
+
+                    <h4>Controls</h4>
+
+                    <label>Brightness</label>
+
+                    <input
+                    type="range"
+                    name="brightness"
+                    min="-100"
+                    max="100"
+                    value="0"
+                    class="form-range">
+
+                    <label>Contrast</label>
+
+                    <input
+                    type="range"
+                    name="contrast"
+                    min="1"
+                    max="3"
+                    step="0.1"
+                    value="1"
+                    class="form-range">
+
+                    <label>Blur</label>
+
+                    <input
+                    type="range"
+                    name="blur"
+                    min="0"
+                    max="10"
+                    value="0"
+                    class="form-range">
+
+                    <label>Sharpness</label>
+
+                    <input
+                    type="range"
+                    name="sharpness"
+                    min="0"
+                    max="5"
+                    step="0.1"
+                    value="1"
+                    class="form-range">
+
+                    <label>Saturation</label>
+
+                    <input
+                    type="range"
+                    name="saturation"
+                    min="0"
+                    max="3"
+                    step="0.1"
+                    value="1"
+                    class="form-range">
+
+                    <label>Pixelation</label>
+
+                    <input
+                    type="range"
+                    name="pixelation"
+                    min="1"
+                    max="20"
+                    value="1"
+                    class="form-range">
+
+                    <button
+                    class="btn btn-primary mt-3">
+
+                        Apply Enhancement
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Original Image -->
+            <div class="col-md-4">
+
+                <div class="card p-3">
+
+                    <h4>
+                        Original Image
+                    </h4>
+
+                    <div class="image-container">
+
+                        <img
+                        src="/{{original_image}}">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Enhanced Image -->
+            <div class="col-md-5">
+
+                <div class="card p-3">
+
+                    <h4>
+                        Enhanced Image
+                    </h4>
+
+                    {% if enhanced_image %}
+
+                    <div class="image-container">
+
+                        <img
+                        src="/{{enhanced_image}}">
+
+                    </div>
+
+                    <a
+                    href="/{{enhanced_image}}"
+                    download
+                    class="btn btn-success mt-3">
+
+                        Download Enhanced
+
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+    {% if enhanced_image %}
+
+    <div class="text-end mt-4">
+
+        <a
+        href="/segment/{{filename}}"
+        class="btn btn-warning btn-lg">
+
+            Next
+
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

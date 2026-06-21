@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Download ZIP
+{% endblock %}
+
+{% block content %}
+
+<h2>
+Download Files
+</h2>
+
+<div class="card p-4">
+
+<a
+href="/download_zip/{{filename}}"
+class="btn btn-primary">
+
+Download All Files ZIP
+
+</a>
+
+</div>
+
+{% endblock %}
